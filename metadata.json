@@ -1,0 +1,7 @@
+{
+  "name": "Flickflow",
+  "description": "A translator that speaks the local language, including internet slang, memes, and cultural nuances, with visual context.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
