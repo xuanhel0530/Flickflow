@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type, Schema, Modality } from "@google/genai";
 import { TranslationResponse } from '../types';
 
-const apiKey = process.env.API_KEY || '';
+// Support both process.env (Node/Webpack) and import.meta.env (Vite) for API Keys
+const apiKey = process.env.API_KEY || (import.meta as any).env?.VITE_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
 // Define the schema for the translation output
@@ -25,7 +26,7 @@ export const translateText = async (
   sourceLang: string, 
   targetLang: string
 ): Promise<TranslationResponse> => {
-  if (!apiKey) throw new Error("API Key missing");
+  if (!apiKey) throw new Error("API Key missing. Please check your environment variables.");
 
   // Optimized prompt for speed
   const prompt = `Translate "${text}" from ${sourceLang} to ${targetLang}. Return JSON.
